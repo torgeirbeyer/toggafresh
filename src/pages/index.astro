@@ -1,0 +1,42 @@
+---
+import { render } from "astro:content";
+import { getPosts } from "../posts";
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import construction from "../assets/construction.gif";
+
+const posts = await getPosts();
+---
+
+<Layout title="Velkommen!" description="… til mitt personlige nettsted !">
+  <Image
+    src={construction}
+    alt="Under construction"
+    class="py-4"
+    loading="eager"
+  />
+  <h1>Velkommen!</h1>
+  <p>… til mitt personlige nettsted !</p>
+  <hr />
+
+  <h2>Siste innlegg</h2>
+  <div class="space-y-1">
+    {posts.map(async (post) => {
+      const { Content } = await render(post);
+      const { title, pubDate } = post.data;
+      return (
+        <article
+          id={post.id}
+          class="p-2 bg-linear-to-t from-paper to-white/50 border shadow"
+        >
+          <h3 class="m-0">{title}</h3>
+          <time datetime={pubDate.toISOString()}>
+            {pubDate.toLocaleDateString("no", { timeZone: "Europe/Oslo" })}
+          </time>
+
+          <Content />
+        </article>
+      );
+    })}
+  </div>
+</Layout>

@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* websafe palette: every channel is 00, 33, 66, 99, cc or ff */
+@theme {
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-serif: "Times New Roman", Times, serif;
+  --font-mono: "Courier New", Courier, monospace;
+
+  /* text scale mirrors browser default heading sizes */
+  --text-*: initial;
+  --text-xs: 0.67rem;
+  --text-sm: 0.83rem;
+  --text-base: 1rem;
+  --text-lg: 1.17rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-paper: #cccccc;
+  --color-shade: #999999;
+  --color-ink: #333333;
+  --color-navy: #003399;
+  --color-link: #0000cc;
+  --color-visited: #660099;
+  --color-maroon: #990000;
+  --color-olive: #666600;
+  --color-teal: #006666;
+  --color-gold: #ffcc00;
+  --color-lime: #ccff33;
+
+  /* hard offset, no blur: the win95 look */
+  --shadow-*: initial;
+  --shadow: 2px 2px 8px color-mix(in srgb, var(--color-ink) 80%, transparent);
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-ink border-ink font-serif;
+  }
+  a {
+    @apply text-link underline visited:text-visited;
+  }
+  /* restore user-agent heading sizes that preflight removes */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold text-black;
+    margin-block: 0.67em;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+    margin-block: 0.83em;
+  }
+  h3 {
+    font-size: 1.17em;
+    margin-block: 1em;
+  }
+  h4 {
+    font-size: 1em;
+    margin-block: 1.33em;
+  }
+  h5 {
+    font-size: 0.83em;
+    margin-block: 1.67em;
+  }
+  h6 {
+    font-size: 0.67em;
+    margin-block: 2.33em;
+  }
+  p,
+  ul,
+  ol,
+  pre {
+    margin-block: 1em;
+  }
+  blockquote {
+    margin: 1em 40px;
+    @apply italic border-l-4 border-shade pl-4;
+  }
+  hr {
+    margin-block: 0.5em;
+    @apply border-t border-shade;
+  }
+  ul {
+    @apply list-disc pl-10;
+  }
+  ol {
+    @apply list-decimal pl-10;
+  }
+}
+
+@utility container {
+  max-width: 600px;
+  margin-inline: auto;
+  padding-inline: 0.5rem;
+  background: var(--color-paper);
+}
